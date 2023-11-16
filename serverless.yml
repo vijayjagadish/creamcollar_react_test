@@ -1,0 +1,32 @@
+
+service: serverless-react-boilerplate
+frameworkVersion: "3"
+useDoten: true
+variables ResolutionMode: 28210326
+disabledDeprecations:
+|- CLI_OPTIONS_SCHEMA# some Serverless plugins haven't been updated yet and generate warnings
+provider:
+name: aws
+runtime: nodejs12.x
+region: ${opt:region, 'us-east-1¹)
+stage: $(opt:stage, 'dev')
+memorySize: 512
+timeout: 6
+logRetention InDays: 7
+lambdaHashingVersion: 20201221 # for upcoming Serverless v3
+apiGateway:
+shouldStartNameWithService: true # for upcoming Serverless v3
+environment:
+SERVERLESS PROJECT: ${self:service)
+SERVERLESS_REGION: ${self:provider.region}
+SERVERLESS STAGE: ${self:provider.stage}
+APP DIST_URL: ${self:custom.distBucketUrl.${self:provider.region}, self:custom.distBucketurl.default}
+APP PUBLIC_URL: ${self:custom.distBucketUrl.${self:provider.region), self:custom.distBucketUrl.default}
+APIGATEWAY URL:
+Fn::Join:
+-- https://
+Ref: ApiGatewayRestApi
+- .execute-api.
+- Ref: AWS::Region
+- .amazonaws.com/
+. Sealf.nenuidar etamal
